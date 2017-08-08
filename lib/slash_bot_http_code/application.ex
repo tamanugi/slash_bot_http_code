@@ -6,10 +6,10 @@ defmodule SlashBotHttpCode.Application do
   use Application
 
   def start(_type, _args) do
-    SlashBotHttpCode.HttpCode.start_link
 
     children = [
-      Plug.Adapters.Cowboy.child_spec(:http, SlashBotHttpCode.Router, [], [port: 4000])
+      Plug.Adapters.Cowboy.child_spec(:http, SlashBotHttpCode.Router, [], [port: 4000]),
+      {SlashBotHttpCode.HttpCode, []}
     ]
 
     opts = [strategy: :one_for_one, name: SlashBotHttpCode.Supervisor]

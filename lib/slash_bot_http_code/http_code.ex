@@ -1,10 +1,13 @@
 defmodule SlashBotHttpCode.HttpCode do
 
+  use Agent
+
   @wiki_url "https://ja.wikipedia.org/wiki/HTTP%E3%82%B9%E3%83%86%E3%83%BC%E3%82%BF%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89"
 
-  def start_link do
-    Agent.start_link(fn -> [] end, name: __MODULE__)
+  def start_link(_init) do
+    res = Agent.start_link(fn -> [] end, name: __MODULE__)
     init()
+    res
   end
 
   def get(key) do
